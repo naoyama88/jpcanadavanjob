@@ -46,7 +46,6 @@ class TwitterService
         $accessTokenSecret = env('TWITTER_ACCESS_TOKEN_SECRET', 'error');
 
         $twitter = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
-        $tweetText = 'test/test/test';
 
         $result = $twitter->post(
             "statuses/update",

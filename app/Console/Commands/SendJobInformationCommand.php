@@ -4,11 +4,10 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use App\Libs\Util;
 use App\Services\Job\JobService;
 use App\Services\Job\SendMailService;
 use App\Services\Line\LineSendMessageService;
-use App\Services\Job\RegisteredUserService;
+use App\Services\Job\TwitterService;
 
 class SendJobInformationCommand extends Command
 {
@@ -45,67 +44,33 @@ class SendJobInformationCommand extends Command
      */
     public function handle()
     {
-        Log::info('start send_job_information');
-
-        // check current time
         if (Util::isMidnight(date('H:i:s'))) {
             Log::info('Now it\'s midnight.');
             return true;
         }
-
-//        $sentType = $util->getSentType($isRunFromCli, $_SERVER); TODO mail service
-
-        // get job information
+        // １、スクレイピングで取得された仕事情報を確認
+        // ２、仕事情報が存在する場合、１件ずつツイート内容を作成してツイート
         $jobService = new JobService();
         $todayJobs = $jobService->getTodayJob('sent_01');
         if (empty($todayJobs) || count($todayJobs) === 0) {
-            Log::info('no job has registered today');
             return true;
         }
-        Log::info('jobs exist');
-
-        // make context from job information
         $sendMailService = new SendMailService();
-        $contentText = $sendMailService->makeContentText($todayJobs);
         $lineService = new LineSendMessageService();
         $lineText = $sendMailService->makeLineContentText($todayJobs);
-
-        // get all mail addresses to send
-        $registeredUserService = new RegisteredUserService();
-        $emailBccs = $registeredUserService->getUserAddresses('sent_01');
-        if (empty($emailBccs)) {
-            // no address has registered
-            Log::info('no address has registered');
-            return true;
-        }
-        Log::info('Bcc counts ' . count($emailBccs));
-        Log::info('start sending mail');
-
-        // send email
-        $response = $sendMailService->sendMail($contentText, $emailBccs);
-        // send line message
         $lineService->sendLineMessage($lineText);
-
-        // check whether the messages has been sent without error
-        if (!empty($response) && substr($response->_status_code, 0, 1) != '2') {
-            // http://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/errors.html
-            $responseBody = json_decode($response->_body);
-            Log::info($responseBody->errors->message);
-
-            return false;
-        }
-
-        Log::info('finish sending mail');
-
-        // update the job records
         $result = $jobService->updateAfterSentMail($todayJobs->pluck('id'), 'sent_01');
-        if ($result === false) {
-            Log::info('fail to update.');
-            return false;
+
+        $twitterService = new TwitterService();
+        foreach ($todayJobs as $job) {
+            $tweetText = $twitterService->makeTweet($job);
+            $twitterService->tweet($tweetText);
+
         }
 
-        Log::info('success to send');
-
+        if ($result === false) {
+            return false;
+        }
         return true;
     }
 }
