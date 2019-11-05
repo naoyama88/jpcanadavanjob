@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use App\Services\Job\TwitterService;
 
 class CommandController
 {
@@ -11,6 +12,8 @@ class CommandController
      */
     public function test()
     {
-        echo "test!";
+        // echo "test!";
+        $twitterService = new TwitterService();
+        $twitterService->tweet("test");
     }
 }
