@@ -58,9 +58,13 @@ class SendJobInformationCommand extends Command
         }
 
         $twitterService = new TwitterService();
+        $cKey = env('TWITTER_CONSUMER_KEY', 'error');
+        $cSecret = env('TWITTER_CONSUMER_SECRET', 'error');
+        $aToken = env('TWITTER_ACCESS_TOKEN', 'error');
+        $aTokenSecret = env('TWITTER_ACCESS_TOKEN_SECRET', 'error');
         foreach ($todayJobs as $job) {
             $tweetText = $twitterService->makeTweet($job);
-            $twitterService->tweet($tweetText);
+            $twitterService->tweet($tweetText, $cKey, $cSecret, $aToken, $aTokenSecret);
         }
         $result = $jobService->updateAfterSentMail($todayJobs->pluck('id'), 'sent_01');
 

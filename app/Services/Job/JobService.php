@@ -2,7 +2,7 @@
 
 namespace App\Services\Job;
 
-use App\Libs\Constant\JobCategory;
+use App\Libs\Constant\Category;
 use App\Libs\Constant\MailType;
 use App\Libs\Constant\Messages;
 use App\Models\Job;
@@ -51,7 +51,7 @@ class JobService
 
             // gif image meant job category (example. /icon/bbs238.png or http://bbs.jpcanada.com/icon/bbs997.gif)
             $category = pq($tableRow)->find('img')->attr('src');
-            if (!in_array($category, JobCategory::JOB_CATEGORIES)) {
+            if (!in_array($category, Category::JOB_CATEGORIES)) {
                 // exclude 広告 or お知らせ
                 continue;
             }

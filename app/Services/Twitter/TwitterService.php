@@ -8,7 +8,7 @@ use App\Libs\Constant\JobCategory;
 
 class TwitterService
 {
-    public function makeTweet($job): string
+    public function makeJobTweet($job): string
     {
         $newLine = PHP_EOL;
         $contentText = '';
@@ -31,16 +31,11 @@ class TwitterService
         return $contentText;
     }
 
-    public function tweet($tweetText)
+    public function tweet($tweetText, $cKey, $cSecret, $aToken, $aTokenSecret)
     {
-        $consumerKey = env('TWITTER_CONSUMER_KEY', 'error');
-        $consumerSecret = env('TWITTER_CONSUMER_SECRET', 'error');
-        $accessToken = env('TWITTER_ACCESS_TOKEN', 'error');
-        $accessTokenSecret = env('TWITTER_ACCESS_TOKEN_SECRET', 'error');
+        $twitter = new TwitterOAuth($cKey, $cSecret, $aToken, $aTokenSecret);
 
-        $twitter = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
-
-        $result = $twitter->post(
+        $twitter->post(
             "statuses/update",
             ["status" => $tweetText]
         );

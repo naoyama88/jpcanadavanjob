@@ -2,7 +2,7 @@
 
 namespace App\Libs\Constant;
 
-class JobCategory
+class Category
 {
     const CATEGORY_OYAKUDACHI     = 'http://bbs.jpcanada.com/icon/bbs997.gif';
     const CATEGORY_OSHIRASE       = '/icon/bbs999.gif';

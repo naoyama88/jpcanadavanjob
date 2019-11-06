@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use App\Libs\Util;
 use App\Services\Job\JobService;
-use App\Libs\Constant\JobCategory;
+use App\Libs\Constant\Category;
 
 class RegisterJobCommand extends Command
 {
@@ -62,7 +62,7 @@ class RegisterJobCommand extends Command
         }
 
         // just in case if something in the site I scrape has been changed
-        $unknownCategory = array_diff(array_column($listedJobs, 'category'), array_keys(JobCategory::CATEGORIES));
+        $unknownCategory = array_diff(array_column($listedJobs, 'category'), array_keys(Category::CATEGORIES));
         if (!empty($unknownCategory)) {
             Log::info("Unknown category has been found. Any other categories might have been added possibly.");
             return false;
