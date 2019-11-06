@@ -13,29 +13,20 @@ class TwitterService
         $newLine = PHP_EOL;
         $contentText = '';
 
-        $tempIndex = 1;
-
         // title
-        $contentText .= $tempIndex . ') ' . $job->title;
-        $contentText .= $newLine;
+        $contentText .= 'タイトル： ' . $job->title . $newLine;
 
         // job category
-        $contentText .= 'カテゴリ： ';
-        $contentText .= JobCategory::CATEGORIES[$job->category];
-        $contentText .= $newLine;
+        $contentText .= 'カテゴリ： ' . JobCategory::CATEGORIES[$job->category] . $newLine;
 
         // hyper link
         $contentText .= $job->href;
         $contentText .= $newLine;
 
         // post datetime
-        $contentText .= ' 入稿時間 ' . $job->post_datetime;
-        $contentText .= $newLine;
-        $contentText .= $newLine;
-
-        $tempIndex++;
-
-        $contentText = rtrim($contentText, PHP_EOL);
+        $time = strtotime($job->post_datetime);
+        $timeFormat = date('Y年m月d日 H時i分',$time);
+        $contentText .= $timeFormat . ' 投稿' . $newLine;
 
         return $contentText;
     }
