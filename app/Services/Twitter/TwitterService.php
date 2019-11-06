@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class TwitterService
 {
-    public function makeTweet(string $job): string
+    public function makeTweet($job): string
     {
         $newLine = PHP_EOL;
         $contentText = '';
