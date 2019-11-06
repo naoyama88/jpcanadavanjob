@@ -4,7 +4,7 @@ namespace App\Services\Job;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Support\Facades\Log;
-use App\Libs\Constant\JobCategory;
+use App\Libs\Constant\Category;
 
 class TwitterService
 {
@@ -17,7 +17,7 @@ class TwitterService
         $contentText .= 'ﾀｲﾄﾙ: ' . $job->title . $newLine;
 
         // job category
-        $contentText .= 'ｶﾃｺﾞﾘ: ' . JobCategory::CATEGORIES[$job->category] . $newLine;
+        $contentText .= 'ｶﾃｺﾞﾘ: ' . Category::CATEGORIES[$job->category] . $newLine;
 
         // hyper link
         $contentText .= $job->href;

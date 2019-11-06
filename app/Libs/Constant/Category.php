@@ -25,6 +25,14 @@ class Category
     const JOB_CATEGORY_FASHION    = '/icon/bbs254.png';
     const JOB_CATEGORY_SELLER     = '/icon/bbs256.png';
     const JOB_CATEGORY_OTHERS     = '/icon/bbs257.png';
+    const ITEM_CATEGORY_SELL      = '/icon/bbs1.gif';
+    const ITEM_CATEGORY_BUY       = '//icon/bbs2.gif';
+    const ITEM_CATEGORY_GIVE      = '/icon/bbs3.gif';
+    const ITEM_CATEGORY_SEEK      = '/icon/bbs4.gif';
+    const ITEM_CATEGORY_CAR       = '/icon/bbs5.gif';
+    const ITEM_CATEGORY_GARAGE    = '/icon/bbs6.gif';
+    const ITEM_CATEGORY_GOBACK    = '/icon/bbs7.gif';
+    const ITEM_CATEGORY_OTHER     = '/icon/bbs255.gif';
 
     // job category + other category
     const CATEGORIES = [
@@ -49,9 +57,16 @@ class Category
         self::JOB_CATEGORY_FASHION    => 'ファッション',
         self::JOB_CATEGORY_SELLER     => '販売・サービス',
         self::JOB_CATEGORY_OTHERS     => 'その他',
+        self::ITEM_CATEGORY_SELL     => '売ります',
+        self::ITEM_CATEGORY_BUY     => '買います',
+        self::ITEM_CATEGORY_GIVE     => 'あげます',
+        self::ITEM_CATEGORY_SEEK     => '探してます',
+        self::ITEM_CATEGORY_CAR     => '中古車',
+        self::ITEM_CATEGORY_GARAGE     => 'ガレージセール',
+        self::ITEM_CATEGORY_GOBACK     => '帰国セール',
+        self::ITEM_CATEGORY_OTHER     => 'その他',
     ];
 
-    // only job category
     const JOB_CATEGORIES = [
         self::JOB_CATEGORY_RESTAURANT,
         self::JOB_CATEGORY_CAFE,
@@ -72,5 +87,16 @@ class Category
         self::JOB_CATEGORY_FASHION,
         self::JOB_CATEGORY_SELLER,
         self::JOB_CATEGORY_OTHERS
+    ];
+
+    const ITEM_CATEGORIES = [
+        self::ITEM_CATEGORY_SELL,
+        self::ITEM_CATEGORY_BUY,
+        self::ITEM_CATEGORY_GIVE,
+        self::ITEM_CATEGORY_SEEK,
+        self::ITEM_CATEGORY_CAR,
+        self::ITEM_CATEGORY_GARAGE,
+        self::ITEM_CATEGORY_GOBACK,
+        self::ITEM_CATEGORY_OTHER,
     ];
 }

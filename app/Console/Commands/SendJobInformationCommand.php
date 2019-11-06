@@ -6,8 +6,6 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use App\Libs\Util;
 use App\Services\Job\JobService;
-use App\Services\Job\SendMailService;
-use App\Services\Line\LineSendMessageService;
 use App\Services\Job\TwitterService;
 
 class SendJobInformationCommand extends Command

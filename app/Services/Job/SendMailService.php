@@ -2,7 +2,7 @@
 
 namespace App\Services\Job;
 
-use App\Libs\Constant\JobCategory;
+use App\Libs\Constant\Category;
 use App\Libs\Constant\Messages;
 use SendGrid\Email;
 use SendGrid\Content;
@@ -29,7 +29,7 @@ class SendMailService
 
             // job category
             $contentText .= 'カテゴリ： ';
-            $contentText .= JobCategory::CATEGORIES[$job->category];
+            $contentText .= Category::CATEGORIES[$job->category];
             $contentText .= $newLine;
 
             // hyper link
@@ -106,7 +106,7 @@ class SendMailService
 
             // job category
             $contentText .= 'カテゴリ： ';
-            $contentText .= JobCategory::CATEGORIES[$job->category];
+            $contentText .= Category::CATEGORIES[$job->category];
             $contentText .= $newLine;
 
             // hyper link
