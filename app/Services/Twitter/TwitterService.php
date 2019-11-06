@@ -14,10 +14,10 @@ class TwitterService
         $contentText = '';
 
         // title
-        $contentText .= 'タイトル： ' . $job->title . $newLine;
+        $contentText .= 'ﾀｲﾄﾙ: ' . $job->title . $newLine;
 
         // job category
-        $contentText .= 'カテゴリ： ' . JobCategory::CATEGORIES[$job->category] . $newLine;
+        $contentText .= 'ｶﾃｺﾞﾘ: ' . JobCategory::CATEGORIES[$job->category] . $newLine;
 
         // hyper link
         $contentText .= $job->href;
