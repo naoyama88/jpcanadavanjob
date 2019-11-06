@@ -4,6 +4,7 @@ namespace App\Services\Job;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Support\Facades\Log;
+use App\Libs\Constant\JobCategory;
 
 class TwitterService
 {
