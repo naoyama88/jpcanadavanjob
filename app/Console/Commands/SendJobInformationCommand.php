@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use App\Libs\Util;
 use App\Services\Job\JobService;
 use App\Services\Job\SendMailService;
 use App\Services\Line\LineSendMessageService;
