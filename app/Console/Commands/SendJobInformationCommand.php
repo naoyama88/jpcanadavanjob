@@ -56,18 +56,13 @@ class SendJobInformationCommand extends Command
         if (empty($todayJobs) || count($todayJobs) === 0) {
             return true;
         }
-        $sendMailService = new SendMailService();
-        $lineService = new LineSendMessageService();
-        $lineText = $sendMailService->makeLineContentText($todayJobs);
-        $lineService->sendLineMessage($lineText);
-        $result = $jobService->updateAfterSentMail($todayJobs->pluck('id'), 'sent_01');
 
         $twitterService = new TwitterService();
         foreach ($todayJobs as $job) {
             $tweetText = $twitterService->makeTweet($job);
             $twitterService->tweet($tweetText);
-
         }
+        $result = $jobService->updateAfterSentMail($todayJobs->pluck('id'), 'sent_01');
 
         if ($result === false) {
             return false;

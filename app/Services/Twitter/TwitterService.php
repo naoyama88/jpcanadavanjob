@@ -3,6 +3,7 @@
 namespace App\Services\Job;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Illuminate\Support\Facades\Log;
 
 class TwitterService
 {
@@ -53,11 +54,13 @@ class TwitterService
         );
 
         if ($twitter->getLastHttpCode() == 200) {
-            // ツイート成功
-            print "tweeted\n";
+            // success
+            Log::info('tweeted');
+            Log::info($tweetText);
         } else {
-            // ツイート失敗
-            print "tweet failed\n";
+            // failed
+            Log::info('tweet failed');
+            Log::info($tweetText);
         }
     }
 }
