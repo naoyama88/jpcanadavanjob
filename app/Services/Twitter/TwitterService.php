@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Job;
+namespace App\Services\Twitter;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Support\Facades\Log;
@@ -8,39 +8,43 @@ use App\Libs\Constant\Category;
 
 class TwitterService
 {
-    public function makeJobTweet($job): string
+    private $twitter;
+
+    public function __construct($cKey, $cSecret, $aToken, $aTokenSecret) {
+        $this->twitter = new TwitterOAuth($cKey, $cSecret, $aToken, $aTokenSecret);
+    }
+
+    public function makeTweet($record): string
     {
         $newLine = PHP_EOL;
         $contentText = '';
 
         // title
-        $contentText .= 'ﾀｲﾄﾙ: ' . $job->title . $newLine;
+        $contentText .= 'ﾀｲﾄﾙ: ' . $record->title . $newLine;
 
-        // job category
-        $contentText .= 'ｶﾃｺﾞﾘ: ' . Category::CATEGORIES[$job->category] . $newLine;
+        // category
+        $contentText .= 'ｶﾃｺﾞﾘ: ' . Category::CATEGORIES[$record->category] . $newLine;
 
         // hyper link
-        $contentText .= $job->href;
+        $contentText .= $record->href;
         $contentText .= $newLine;
 
         // post datetime
-        $time = strtotime($job->post_datetime);
+        $time = strtotime($record->post_datetime);
         $timeFormat = date('Y年m月d日 H時i分',$time);
         $contentText .= $timeFormat . ' 投稿' . $newLine;
 
         return $contentText;
     }
 
-    public function tweet($tweetText, $cKey, $cSecret, $aToken, $aTokenSecret)
+    public function tweet(string $tweetText)
     {
-        $twitter = new TwitterOAuth($cKey, $cSecret, $aToken, $aTokenSecret);
-
-        $twitter->post(
+        $this->twitter->post(
             "statuses/update",
             ["status" => $tweetText]
         );
 
-        if ($twitter->getLastHttpCode() == 200) {
+        if ($this->twitter->getLastHttpCode() == 200) {
             // success
             Log::info('tweeted');
             Log::info($tweetText);

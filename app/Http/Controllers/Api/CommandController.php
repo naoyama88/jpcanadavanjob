@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Services\Job\TwitterService;
+use App\Services\Twitter\TwitterService;
 
 class CommandController
 {

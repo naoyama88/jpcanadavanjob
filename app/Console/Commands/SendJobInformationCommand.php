@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use App\Libs\Util;
 use App\Services\Job\JobService;
-use App\Services\Job\TwitterService;
+use App\Services\Twitter\TwitterService;
 
 class SendJobInformationCommand extends Command
 {
@@ -55,14 +55,14 @@ class SendJobInformationCommand extends Command
             return true;
         }
 
-        $twitterService = new TwitterService();
-        $cKey = env('TWITTER_CONSUMER_KEY', 'error');
-        $cSecret = env('TWITTER_CONSUMER_SECRET', 'error');
-        $aToken = env('TWITTER_ACCESS_TOKEN', 'error');
-        $aTokenSecret = env('TWITTER_ACCESS_TOKEN_SECRET', 'error');
+        $cKey = env('TWITTER_CONSUMER_KEY_JOB', 'error');
+        $cSecret = env('TWITTER_CONSUMER_SECRET_JOB', 'error');
+        $aToken = env('TWITTER_ACCESS_TOKEN_JOB', 'error');
+        $aTokenSecret = env('TWITTER_ACCESS_TOKEN_SECRET_JOB', 'error');
+        $twitterService = new TwitterService($cKey, $cSecret, $aToken, $aTokenSecret);
         foreach ($todayJobs as $job) {
-            $tweetText = $twitterService->makeJobTweet($job);
-            $twitterService->tweet($tweetText, $cKey, $cSecret, $aToken, $aTokenSecret);
+            $tweetText = $twitterService->makeTweet($job);
+            $twitterService->tweet($tweetText);
         }
         $result = $jobService->updateAfterSentMail($todayJobs->pluck('id'), 'sent_01');
 
