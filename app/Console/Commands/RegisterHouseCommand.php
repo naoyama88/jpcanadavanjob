@@ -56,7 +56,7 @@ class RegisterHouseCommand extends Command
 
         $houseService = new HouseService();
         $listedHouses = $houseService->scrapeHouses();
-        Log::info($listedHouses);
+        // Log::info($listedHouses);
         if (empty($listedHouses)) {
             Log::info('no house or could not get house');
             return false;
