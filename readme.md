@@ -1,5 +1,5 @@
 # jpcanadavanjob
-- Twitter bot
+- Twitter bot for Japanese who lives in Vancouver
 - Get info from this site and tweet for 3 topics (job, buy&sell, rent)
 https://www.jpcanada.com/
 ---
