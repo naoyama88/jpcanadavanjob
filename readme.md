@@ -1,4 +1,4 @@
-# jpcanadavanjob
+# JPCANADAVANJOB
 - Twitter bot for Japanese who lives in Vancouver
 - Get info from this site and tweet for 3 topics (job, buy&sell, rent)
 https://www.jpcanada.com/
@@ -13,6 +13,8 @@ https://www.jpcanada.com/
 - https://twitter.com/jpcanadavanhs
 ---
 
+
+![Structure of this app](https://user-images.githubusercontent.com/15808541/76872778-1943a480-682a-11ea-84c6-ee97a7cc5108.png)
 
 ## Tech
 - heroku (free)
