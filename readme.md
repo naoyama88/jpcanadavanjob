@@ -15,6 +15,7 @@ https://www.jpcanada.com/
 
 
 ![Structure of this app](https://user-images.githubusercontent.com/15808541/76872778-1943a480-682a-11ea-84c6-ee97a7cc5108.png)
+![jpcanada_structure](https://user-images.githubusercontent.com/15808541/76873672-4f355880-682b-11ea-8274-8e6ae4fadca7.png)
 
 ## Tech
 - heroku (free)
