@@ -3,6 +3,9 @@
 - Get info from this site and tweet for 3 topics ('Job', 'Rent' and  'Buy&Sell')
 https://www.jpcanada.com/
 
+## (What is JPCANADA?)
+- JPCANADA is the website that offers bunch of information for Japanese people who lives in Canada
+
 ## Why I created this
 - The website jpcanada didn't have twitter account and RSS
 - To help japanese people in Vancouver, especially young folks
